@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/mchmarny/s3cme/internal/server"
+	"github.com/ryan-ohare-nydig/s3cme-demo-demo/internal/server"
 )
 
 var (

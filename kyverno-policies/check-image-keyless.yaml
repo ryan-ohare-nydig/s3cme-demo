@@ -14,11 +14,11 @@ spec:
                 - Pod
       verifyImages:
         - imageReferences:
-            - "ghcr.io/mchmarny/s3cme:v*"
+            - "ghcr.io/ryan-ohare-nydig/s3cme-demo-demo:v*"
           attestors:
             - entries:
                 - keyless:
-                    subject: "https://github.com/developer-guy/s3cme/.github/workflows/sign-keyless.yaml@refs/tags/v*"
+                    subject: "https://github.com/developer-guy/s3cme-demo/.github/workflows/sign-keyless.yaml@refs/tags/v*"
                     issuer: "https://token.actions.githubusercontent.com"
                     rekor:
                       url: https://rekor.sigstore.dev

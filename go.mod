@@ -1,4 +1,4 @@
-module github.com/mchmarny/s3cme
+module github.com/ryan-ohare-nydig/s3cme-demo-demo
 
 go 1.21
 
