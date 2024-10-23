@@ -40,6 +40,8 @@ jobs:
     needs: [conf]
     permissions:
       actions: read
+      security-events: write
+
     steps:
     - name: Checkout for SARIF Report
       if: ${{ always() }}
