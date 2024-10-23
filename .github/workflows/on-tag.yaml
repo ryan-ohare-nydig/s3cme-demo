@@ -77,6 +77,7 @@ jobs:
     permissions:
       contents: read
       actions: read
+      security-events: write
     uses: ./.github/workflows/scan.yaml
     with:
       image_digest: ${{ needs.build.outputs.digest }}
