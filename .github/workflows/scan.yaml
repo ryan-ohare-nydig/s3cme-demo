@@ -27,7 +27,6 @@ jobs:
       uses: aquasecurity/trivy-action@915b19bbe73b92a6cf82a1bc12b087c9a19a5fe2  # 0.28.0
       with:
         scan-type: image
-        security-checks: vuln
         severity: ${{ inputs.scan_severity }}
         image-ref: ${{ inputs.image_digest }}
         github-pat: ${{ secrets.GITHUB_TOKEN }}
