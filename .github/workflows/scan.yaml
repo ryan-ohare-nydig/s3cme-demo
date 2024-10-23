@@ -17,13 +17,28 @@ permissions:
   contents: read
 
 jobs:
+  conf:
+    env:
+      # Update as needed
+      TRIVY_RESULTS: trivy-results.sarif
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      trivy_results: ${{ steps.conf.outputs.trivy_results }}
+    steps:
+    - name: Export Config
+      id: conf
+      run: |
+        echo "trivy_results=${{ env.TRIVY_RESULTS }}" >> $GITHUB_OUTPUT
   scan:
     runs-on: ubuntu-latest
+    needs: [conf]
     permissions:
       actions: read
     steps:
-
     - name: Scan Image
+      id: trivy
       uses: aquasecurity/trivy-action@915b19bbe73b92a6cf82a1bc12b087c9a19a5fe2  # 0.28.0
       with:
         scan-type: image
@@ -31,7 +46,16 @@ jobs:
         image-ref: ${{ inputs.image_digest }}
         github-pat: ${{ secrets.GITHUB_TOKEN }}
         format: sarif
-        output: trivy-results.sarif
+        output: ${{ needs.conf.outputs.trivy_results}}
         hide-progress: true
         timeout: "10m"
         exit-code: "1"
+    - name: Upload SARIF report
+      uses: actions/upload-artifact@v3
+      with:
+        name: trivy-sarif-report
+        path: ${{ needs.conf.outputs.trivy_results}}
+    - name: Upload SARIF to GitHub Code Scanning
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: ${{ needs.conf.outputs.trivy_results}}
