@@ -51,13 +51,13 @@ jobs:
         timeout: "10m"
         exit-code: "1"
     - name: Upload SARIF report
-      continue-on-error: true
+      if: ${{ always() }}
       uses: actions/upload-artifact@v3
       with:
         name: trivy-sarif-report
         path: ${{ needs.conf.outputs.trivy_results}}
     - name: Upload SARIF to GitHub Code Scanning
-      continue-on-error: true
+      if: ${{ always() }}
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: ${{ needs.conf.outputs.trivy_results}}
