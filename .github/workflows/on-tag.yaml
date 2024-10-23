@@ -81,6 +81,7 @@ jobs:
     with:
       image_digest: ${{ needs.build.outputs.digest }}
       scan_severity: ${{ needs.conf.outputs.err_on_vulnerability_sev }}
+      tag: ${{ github.ref }}
 
   slsa:
     needs:
