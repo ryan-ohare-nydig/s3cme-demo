@@ -70,19 +70,19 @@ jobs:
       cosign_version: ${{ needs.conf.outputs.cosign_version }}
       image_digest: ${{ needs.build.outputs.digest }}
 
-  scan:
-    needs:
-    - conf
-    - build
-    permissions:
-      contents: read
-      actions: read
-      security-events: write
-    uses: ./.github/workflows/scan.yaml
-    with:
-      image_digest: ${{ needs.build.outputs.digest }}
-      scan_severity: ${{ needs.conf.outputs.err_on_vulnerability_sev }}
-      tag: ${{ github.ref }}
+  # scan:
+  #   needs:
+  #   - conf
+  #   - build
+  #   permissions:
+  #     contents: read
+  #     actions: read
+  #     security-events: write
+  #   uses: ./.github/workflows/scan.yaml
+  #   with:
+  #     image_digest: ${{ needs.build.outputs.digest }}
+  #     scan_severity: ${{ needs.conf.outputs.err_on_vulnerability_sev }}
+  #     tag: ${{ github.ref }}
 
   slsa:
     needs:

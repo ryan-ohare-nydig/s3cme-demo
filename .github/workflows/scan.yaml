@@ -67,9 +67,9 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: trivy-sarif-report
-        path: ${{ needs.conf.outputs.trivy_results}}
+        path: ${{ needs.conf.outputs.trivy_results }}
     - name: Upload SARIF to GitHub Code Scanning
       if: ${{ always() }}
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: ${{ needs.conf.outputs.trivy_results}}
+        sarif_file: ${{ needs.conf.outputs.trivy_results }}
